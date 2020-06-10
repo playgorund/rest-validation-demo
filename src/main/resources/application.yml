@@ -1,0 +1,16 @@
+spring: 
+  application: 
+    name: DEMO
+  sleuth:
+    propagation-keys:
+    - dealCode
+    baggage-keys: 
+    - snapName
+    - dealCode
+    log:
+      slf4j:
+        whitelisted-mdc-keys:
+        - dealCode
+logging: 
+  pattern: 
+    level: "%5p [${spring.zipkin.service.name:${spring.application.name:-}},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] --- [ %X{X-B3-SpanName:-} , %X{X-B3-baggage-dealCode:-} , %X{dealCode:-}, %X{baggagedealCode:-} , %X{X-B3-baggagedealCode:-}  , %X{x-vcap-request-id-dealCode:-} ]"
